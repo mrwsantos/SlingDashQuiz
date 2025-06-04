@@ -172,7 +172,7 @@ export default function Home() {
 
               {step < questions.length - 1 ? (
                 <Button
-                  customStyle="border-1 bg-white w-fit px-8 m-auto hover:bg-gray-100 py-3 px-16"
+                  customStyle="border-1 bg-white w-fit m-auto hover:bg-gray-100 px-16 h-11.5 pt-0.5"
                   text="Next Question"
                   onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                     e.preventDefault();
@@ -183,7 +183,7 @@ export default function Home() {
                 />
               ) : (
                 <Button
-                  customStyle="border-1 bg-white w-fit px-8 m-auto hover:bg-gray-100 py-3 px-16"
+                  customStyle="border-1 bg-white w-fit px-8 m-auto hover:bg-gray-100 px-16 h-11.5 pt-0.5"
                   text="Submit Survey"
                   onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                     e.preventDefault();
