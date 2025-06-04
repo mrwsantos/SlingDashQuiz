@@ -4,6 +4,7 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 const NoResults = () => {
 
     return (
+
         <div className="p-5 text-center max-w-md">
             <DotLottieReact
                 src="https://lottie.host/08864e37-bfe9-40d9-8723-e94753d5c1f2/BDUSHwzIrM.lottie"
