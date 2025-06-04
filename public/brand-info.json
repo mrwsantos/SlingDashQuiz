@@ -1,11 +1,11 @@
 {
-    "companyTitle": "SlingDash Quiz",
+    "companyTitle": "Noel Leeming",
     "mainColor": "#47829d",
     "textColor": "#2e2e33",
     "wordcloudColor": "#fff",
     "questions": [
         {
-            "name": "Purpose",
+            "name": "NL Purpose",
             "question": "Why does this brand exist?"
         },
         {
