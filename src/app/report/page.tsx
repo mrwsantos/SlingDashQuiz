@@ -133,7 +133,7 @@ export default function Page() {
                         autoplay
                         className=''
                     />
-                    <p>No data available at the moment. Please try again later.
+                    <p className="text-center">No data available at the moment. Please try again later.
                     </p>
                 </div>
             ) : (

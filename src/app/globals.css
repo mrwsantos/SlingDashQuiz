@@ -32,11 +32,13 @@ body {
 }
 
 .home {
-  height: 100vh;
-  /* justify-content: space-between; */
   display: flex;
   flex-direction: column;
   padding-bottom: 30px;
+
+  @media (max-width: 1025px) {
+    height: calc(100vh - 50px);
+  }
 }
 
 form {

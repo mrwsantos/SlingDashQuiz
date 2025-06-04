@@ -147,15 +147,15 @@ export default function Home() {
 
       <form
         action=""
-        className={`flex flex-col gap-8 items-center justify-center w-full`}
+        className={`flex flex-col gap-8 items-center w-full pt-40`}
         id="form"
       >
 
         {mainLoading ? (<Loading />) : (!showSuccess && !showFail) && (
           <>
-            <h1 className="header text-center p-4 text-white text-md bg-gray-800">{brandInfo?.companyTitle}</h1>
+            <h1 className="flex items-center justify-center header text-center p-4 text-white text-md " style={{ backgroundColor: '#3A3938', height: '80px' }}>{brandInfo?.companyTitle}</h1>
 
-            <div className={`formContent flex flex-col gap-8 ${fade} pt-20 pb-20 w-full`}>
+            <div className={`formContent flex flex-col gap-8 ${fade} w-full`}>
               <h3 className="text-gray-500 uppercase m-auto text-center">
                 {questions[step]?.name}
               </h3>
