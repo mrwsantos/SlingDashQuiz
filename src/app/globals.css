@@ -93,7 +93,7 @@ h1.header {
 .fade-to {
   opacity: 0;
 
-  animation: fadeIn 0.5s linear alternate infinite;
+  animation: fadeIn 0.3s linear alternate infinite;
 }
 
 @keyframes fadeIn {
