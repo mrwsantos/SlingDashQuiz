@@ -203,7 +203,7 @@ export default function Home() {
         {!mainLoading && showFail && <Fail />}
 
 
-        <div className="formFooter">
+        <div className="formFooter mt-[15vh] ">
           {loading && <Loading />}
         </div>
 

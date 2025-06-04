@@ -3,6 +3,7 @@
 import Loading from "@/components/Loading";
 import { useEffect, useState } from "react";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import NoResults from "@/components/NoResults";
 
 declare global {
     interface Window {
@@ -65,16 +66,20 @@ export default function Page() {
     }, [brandInfo])
 
     useEffect(() => {
+        if (!loading && !keywordsArray.length) setNoResults(true)
+
         if (!loading && keywordsArray.length && typeof window !== 'undefined') {
             const script = document.createElement('script');
             script.src = '/wordcloud2.js';
             script.async = true;
+
+            let resizeObserver: ResizeObserver;
+
             script.onload = () => {
-                const canvas = document.getElementById('my_canvas') as HTMLCanvasElement;
+                const canvas = document.getElementById('my_canvas');
+                if (!canvas || !(canvas instanceof HTMLCanvasElement) || !window.WordCloud) return;
 
                 const drawCloud = () => {
-                    if (!canvas || !window.WordCloud) return;
-
                     const dpr = window.devicePixelRatio || 1;
                     canvas.width = canvas.offsetWidth * dpr;
                     canvas.height = canvas.offsetHeight * dpr;
@@ -87,59 +92,55 @@ export default function Page() {
                         gridSize: 10,
                         weightFactor: (size: number) => size * 20,
                         fontFamily: 'Helvetica, Arial, sans-serif',
-                        // color: brandInfo?.wordcloudColor,
-                        // color: 'random-light',
                         color: 'random-dark',
-                        // backgroundColor: brandInfo?.mainColor,
                         backgroundColor: '#f7f7f7',
                         rotateRatio: 0.4,
                         rotationSteps: 2,
                         drawOutOfBound: false,
                         shrinkToFit: true,
                         origin: [canvas.offsetWidth / 2, canvas.offsetHeight / 2],
-                        // shape: 'triangle-forward'
                     });
                 };
 
                 drawCloud();
 
-                const resizeObserver = new ResizeObserver(() => {
+                resizeObserver = new ResizeObserver(() => {
                     drawCloud();
                 });
-                resizeObserver.observe(canvas);
 
-                // Clean up
-                return () => resizeObserver.disconnect();
+                resizeObserver.observe(canvas);
             };
 
             document.body.appendChild(script);
+
+            return () => {
+                if (resizeObserver) resizeObserver.disconnect();
+                document.body.removeChild(script);
+            };
         }
-        if (!keywordsArray.length) {
-            setNoResults(true)
-        }
+
+        // if (!keywordsArray.length) {
+        // }
     }, [loading, keywordsArray]);
 
 
+
     return (
-        <main className="flex w-full h-full items-center justify-center" style={{
-            minHeight: '100vh'
-        }}>
-            {loading ? (<Loading />) : noResults ? (
-                <div>
-
-                    <DotLottieReact
-                        src="https://lottie.host/08864e37-bfe9-40d9-8723-e94753d5c1f2/BDUSHwzIrM.lottie"
-                        loop
-                        autoplay
-                        className=''
-                    />
-                    <p className="text-center">No data available at the moment. Please try again later.
-                    </p>
-                </div>
+        <main
+            className="flex w-full h-full items-center justify-center bg-white"
+            style={{ minHeight: '100vh' }}
+        >
+            {loading ? (
+                <Loading />
+            ) : noResults ? (
+                <NoResults />
             ) : (
-                <canvas id="my_canvas" style={{ width: '100vw', height: '100vh' }}></canvas>
+                <canvas
+                    id="my_canvas"
+                    style={{ width: '100vw', height: '100vh', display: 'block' }}
+                ></canvas>
             )}
-
-        </main >
+        </main>
     );
+
 }
