@@ -11,15 +11,22 @@ import Success from "@/components/Success";
 import Fail from "@/components/Fail";
 const keyword_extractor = require("keyword-extractor");
 
+interface Question {
+  name: string,
+  question: string
+}
+
 export default function Home() {
   const [brandInfo, setBrandInfo] = useState<null | {
     companyTitle: string;
     mainColor: string;
     textColor: string;
     wordcloudColor: string;
-    questions: object[];
+    questions: Question[];
     keywordsSheetsColumn: string
   }>(null);
+
+
 
   const [mainLoading, setMainLoading] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,9 +35,9 @@ export default function Home() {
 
   const [step, setStep] = useState<number>(0);
   const [fade, setFade] = useState<'fade-in' | 'fade-out'>('fade-in');
-  const [keyWords, setKeyWords] = useState<string>('')
+  const [keyWords, setKeyWords] = useState<string[]>([])
 
-  const [questions, setQuestions] = useState<object[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<string[]>(Array(10).fill(''));
 
   const commonTimeoutTime = 1500;
@@ -46,7 +53,7 @@ export default function Home() {
 
   useEffect(() => {
     if (brandInfo) {
-      setQuestions(brandInfo?.questions);
+      setQuestions(brandInfo.questions);
 
       if (brandInfo?.questions.length) {
         setTimeout(() => {
@@ -167,11 +174,9 @@ export default function Home() {
                 <Button
                   customStyle="border-1 bg-white w-fit px-8 m-auto hover:bg-gray-100 py-3 px-16"
                   text="Next Question"
-                  onClick={(e: any) => {
+                  onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                     e.preventDefault();
-                    if (step < questions.length - 1) {
-                      handleStepChange('next');
-                    }
+                    handleStepChange('next')
                   }}
                   disabled={step >= questions.length - 1}
                   type="button"
@@ -180,13 +185,12 @@ export default function Home() {
                 <Button
                   customStyle="border-1 bg-white w-fit px-8 m-auto hover:bg-gray-100 py-3 px-16"
                   text="Submit Survey"
-                  onClick={(e: any) => {
+                  onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                     e.preventDefault();
                     getKeyWords();
                     setLoading(true)
                   }}
-                  disabled={loading} s
-                // type="submit"
+                  disabled={loading}
                 />
               )}
 

@@ -7,7 +7,7 @@ import { ChevronRight } from "@deemlol/next-icons";
 type footerProps = {
     length: number;
     step: number;
-    handleStepChange: (t: any) => void
+    handleStepChange: (t: 'next' | 'back') => void
 }
 
 const Footer = ({ length, step, handleStepChange }: footerProps) => {

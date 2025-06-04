@@ -3,6 +3,12 @@
 import Loading from "@/components/Loading";
 import { useEffect, useState } from "react";
 
+declare global {
+    interface Window {
+        WordCloud: any;
+    }
+}
+
 export default function Page() {
     const [loading, setLoading] = useState(true);
     const [keywordsArray, setKeywordsArray] = useState<[string, number][]>([]);
@@ -28,7 +34,7 @@ export default function Page() {
 
 
     const getGoogleData = async (sheetId: string) => {
-        const res = await fetch(`/api/sheets?spreadsheetId=${sheetId}&range=Output!K2:K1000`);
+        const res = await fetch(`/api/sheets?spreadsheetId=${sheetId}&range=Output!${brandInfo?.keywordsSheetsColumn}`);
         const data = await res.json();
 
         const cleaned = data
@@ -52,7 +58,7 @@ export default function Page() {
     };
 
     useEffect(() => {
-        const sheetsId: string = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_ID;
+        const sheetsId: string = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_ID || '';
         if (brandInfo) getGoogleData(sheetsId);
     }, [brandInfo])
 
