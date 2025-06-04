@@ -1,0 +1,49 @@
+{
+    "companyTitle": "SlingDash Quiz",
+    "mainColor": "#47829d",
+    "textColor": "#2e2e33",
+    "wordcloudColor": "#fff",
+    "questions": [
+        {
+            "name": "Purpose",
+            "question": "Why does this brand exist?"
+        },
+        {
+            "name": "The rational proposition or boilerplate",
+            "question": "What exactly does your business do?"
+        },
+        {
+            "name": "Audience definition",
+            "question": "Who are we talking to?"
+        },
+        {
+            "name": "Brand champions",
+            "question": "Who can help spread the word about this brand?"
+        },
+        {
+            "name": "Values and organisational behaviours",
+            "question": "If you were responsible for replacing yourself tomorrow, what key attributes would your replacement need?"
+        },
+        {
+            "name": "Current value propositions",
+            "question": "What makes your brand better than your competitors?"
+        },
+        {
+            "name": "Future value propositions",
+            "question": "What could your brand do better?"
+        },
+        {
+            "name": "Personality and tone of voice",
+            "question": "What personality traits would help set the tone for your brand?"
+        },
+        {
+            "name": "Emotions are valuable",
+            "question": "How do you want our audience to feel?"
+        },
+        {
+            "name": "Additional information",
+            "question": "Is there anything else you think is relevant to this conversation?"
+        }
+    ],
+    "keywordsSheetsColumn": "K2:K1000"
+}

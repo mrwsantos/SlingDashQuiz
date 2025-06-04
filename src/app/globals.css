@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+
+  position: relative;
+}
+
+.main {
+  min-height: 100vh;
+}
+
+.home {
+  height: 100vh;
+  /* justify-content: space-between; */
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+}
+
+form {
+  flex: auto;
+}
+
+button {
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    /* background-color: #ccc; */
+  }
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(0.95);
+  }
+}
+
+/* styles/globals.css (ou equivalente) */
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.4s ease-in;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+
+h1.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.fade-to {
+  opacity: 0;
+
+  animation: fadeIn 2s linear forwards;
+}
+
+@keyframes fadeIn {
+  100% {
+    opacity: 1;
+  }
+}
