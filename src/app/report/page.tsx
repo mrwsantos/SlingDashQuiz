@@ -2,6 +2,7 @@
 
 import Loading from "@/components/Loading";
 import { useEffect, useState } from "react";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 declare global {
     interface Window {
@@ -13,6 +14,7 @@ export default function Page() {
     const [loading, setLoading] = useState(true);
     const [keywordsArray, setKeywordsArray] = useState<[string, number][]>([]);
     const commonTimeoutTime = 1500;
+    const [noResults, setNoResults] = useState<boolean>(false)
 
     const [brandInfo, setBrandInfo] = useState<null | {
         companyTitle: string;
@@ -112,6 +114,9 @@ export default function Page() {
 
             document.body.appendChild(script);
         }
+        if (!keywordsArray.length) {
+            setNoResults(true)
+        }
     }, [loading, keywordsArray]);
 
 
@@ -119,9 +124,22 @@ export default function Page() {
         <main className="flex w-full h-full items-center justify-center" style={{
             minHeight: '100vh'
         }}>
-            {loading ? (<Loading />) : (
+            {loading ? (<Loading />) : noResults ? (
+                <div>
+
+                    <DotLottieReact
+                        src="https://lottie.host/08864e37-bfe9-40d9-8723-e94753d5c1f2/BDUSHwzIrM.lottie"
+                        loop
+                        autoplay
+                        className=''
+                    />
+                    <p>No data available at the moment. Please try again later.
+                    </p>
+                </div>
+            ) : (
                 <canvas id="my_canvas" style={{ width: '100vw', height: '100vh' }}></canvas>
             )}
+
         </main >
     );
 }
