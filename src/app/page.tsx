@@ -147,7 +147,7 @@ export default function Home() {
 
       <form
         action=""
-        className={`flex flex-col gap-8 items-center w-full pt-40`}
+        className={`flex flex-col gap-10 items-center w-full pt-40`}
         id="form"
       >
 

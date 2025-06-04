@@ -20,9 +20,9 @@ const Input = ({
     className = '',
 }: InputProps) => {
     return (
-        <label className="flex flex-col justify-center items-center w-[95%] max-w-2xl m-auto gap-4">
+        <label className="flex flex-col justify-center items-center w-[95%] max-w-2xl m-auto gap-10">
             {label && (
-                <span className=" text-center leading-[1.4] text-black" style={{ fontSize: '32px' }}>{label}</span>
+                <span className="question-text text-center leading-[1.4] text-black">{label}</span>
             )}
             {multiline ? (
                 <textarea
