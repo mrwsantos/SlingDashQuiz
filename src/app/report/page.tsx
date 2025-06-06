@@ -91,13 +91,13 @@ export default function Page() {
                     window.WordCloud(canvas, {
                         list: keywordsArray,
                         // gridSize: keywordsArray.length * 1.5,
-                        gridSize: Math.max(8, Math.min(50, Math.floor(keywordsArray.length * 0.8))),
+                        gridSize: Math.max(12, Math.min(50, Math.floor(keywordsArray.length * 0.3))),
                         // gridSize: 25,
                         // weightFactor: (size: number) =>
                         // size * Math.max(8, Math.min(100, 200 / keywordsArray.length)),
 
                         // weightFactor: (size: number) => size * 25,
-                        weightFactor: (size: number) => Math.min(10, Math.max(1.5, size)) * 20,
+                        weightFactor: (size: number) => Math.min(10, Math.max(1.05, size)) * 15,
 
 
                         fontFamily: 'Akatab, sans-serif',
