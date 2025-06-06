@@ -7,10 +7,11 @@ import { ChevronRight } from "@deemlol/next-icons";
 type footerProps = {
     length: number;
     step: number;
+    disableNext: boolean;
     handleStepChange: (t: 'next' | 'back') => void
 }
 
-const Footer = ({ length, step, handleStepChange }: footerProps) => {
+const Footer = ({ length, step, disableNext, handleStepChange }: footerProps) => {
 
 
 
@@ -36,7 +37,7 @@ const Footer = ({ length, step, handleStepChange }: footerProps) => {
                         handleStepChange('next');
                     }
                 }}
-                disabled={step >= length - 1}
+                disabled={disableNext}
                 type="button"
             >
                 Next

@@ -69,7 +69,7 @@ export default function Home() {
     setTimeout(() => {
       setStep(prev => direction === 'next' ? prev + 1 : prev - 1);
       setFade('fade-in');
-    }, 300);
+    }, 200);
   };
 
   const handleAnswerChange = (value: string) => {
@@ -138,8 +138,6 @@ export default function Home() {
     }
   };
 
-
-
   return (
     <main className="home h-screen">
 
@@ -176,9 +174,9 @@ export default function Home() {
                   text="Next Question"
                   onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                     e.preventDefault();
-                    handleStepChange('next')
+                    handleStepChange('next');
                   }}
-                  disabled={step >= questions.length - 1}
+                  disabled={!answers[step]?.trim()}
                   type="button"
                 />
               ) : (
@@ -188,13 +186,11 @@ export default function Home() {
                   onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                     e.preventDefault();
                     getKeyWords();
-                    setLoading(true)
+                    setLoading(true);
                   }}
-                  disabled={loading}
+                  disabled={loading || !answers[step]?.trim()}
                 />
               )}
-
-
             </div>
           </>
         )}
@@ -210,7 +206,7 @@ export default function Home() {
       </form>
 
       {!showSuccess && !showFail && !mainLoading && (
-        <Footer length={questions.length} step={step} handleStepChange={handleStepChange} />
+        <Footer length={questions.length} step={step} disableNext={!answers[step]?.trim()} handleStepChange={handleStepChange} />
       )}
     </main>
   );

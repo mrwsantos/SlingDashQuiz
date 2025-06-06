@@ -45,7 +45,8 @@ export default function Page() {
             .join(',')
             .split(',')
             .map((w: any) => w.trim().toLowerCase())
-            .filter((w: any) => w.length > 1 && /^[a-z-]+$/.test(w));
+            // .filter((w: any) => w.length > 1 && /^[a-z-]+$/.test(w));
+            .filter((w: any) => w.length > 1 && /^[a-z0-9-]+$/.test(w));
 
         const frequency: Record<string, number> = {};
         cleaned.forEach((word: any) => {
@@ -89,15 +90,24 @@ export default function Page() {
 
                     window.WordCloud(canvas, {
                         list: keywordsArray,
-                        gridSize: 10,
-                        weightFactor: (size: number) => size * 20,
-                        fontFamily: 'Helvetica, Arial, sans-serif',
+                        // gridSize: keywordsArray.length * 1.5,
+                        gridSize: Math.max(8, Math.min(50, Math.floor(keywordsArray.length * 0.8))),
+                        // gridSize: 25,
+                        // weightFactor: (size: number) =>
+                        // size * Math.max(8, Math.min(100, 200 / keywordsArray.length)),
+
+                        // weightFactor: (size: number) => size * 25,
+                        weightFactor: (size: number) => Math.min(10, Math.max(1.5, size)) * 20,
+
+
+                        fontFamily: 'Akatab, sans-serif',
                         color: 'random-dark',
                         backgroundColor: '#f7f7f7',
-                        rotateRatio: 0.4,
+                        rotateRatio: 0,
                         rotationSteps: 2,
                         drawOutOfBound: false,
                         shrinkToFit: true,
+                        minSize: 1,
                         origin: [canvas.offsetWidth / 2, canvas.offsetHeight / 2],
                     });
                 };
@@ -122,8 +132,6 @@ export default function Page() {
         // if (!keywordsArray.length) {
         // }
     }, [loading, keywordsArray]);
-
-
 
     return (
         <main
