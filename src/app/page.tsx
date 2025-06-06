@@ -122,7 +122,7 @@ export default function Home() {
       }
 
       const data = await res.json();
-      console.log('Data successfully saved:', data);
+      // console.log('Data successfully saved:', data);
       setTimeout(() => {
         setShowSuccess(true)
       }, commonTimeoutTime)

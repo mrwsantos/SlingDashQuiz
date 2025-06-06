@@ -30,7 +30,7 @@ export async function PATCH(req: NextRequest) {
             },
         });
 
-        console.log('✅ Dados adicionados com sucesso:', result.data);
+        // console.log('✅ Dados adicionados com sucesso:', result.data);
 
         return new Response(JSON.stringify({ success: true, updates: result.data.updates }), { status: 200 });
     } catch (error: any) {
