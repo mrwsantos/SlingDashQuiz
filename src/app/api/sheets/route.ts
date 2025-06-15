@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
         const sheets = google.sheets({ version: 'v4', auth });
         const response = await sheets.spreadsheets.values.get({ spreadsheetId, range });
 
-        console.log('✅ Sheets API response:', response.data);
+        // console.log('✅ Sheets API response:', response.data);
 
         // Certifique-se de sempre retornar JSON válido
         return new Response(JSON.stringify(response.data.values || []), { status: 200 });

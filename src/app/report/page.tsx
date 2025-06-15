@@ -45,7 +45,8 @@ export default function Page() {
             .join(',')
             .split(',')
             .map((w: any) => w.trim().toLowerCase())
-            .filter((w: any) => w.length > 1 && /^[a-z-]+$/.test(w));
+            // .filter((w: any) => w.length > 1 && /^[a-z-]+$/.test(w));
+            .filter((w: any) => w.length > 1 && /^[a-z0-9-]+$/.test(w));
 
         const frequency: Record<string, number> = {};
         cleaned.forEach((word: any) => {
@@ -65,6 +66,7 @@ export default function Page() {
         if (brandInfo) getGoogleData(sheetsId);
     }, [brandInfo])
 
+
     useEffect(() => {
         if (!loading && !keywordsArray.length) setNoResults(true)
 
@@ -74,6 +76,12 @@ export default function Page() {
             script.async = true;
 
             let resizeObserver: ResizeObserver;
+
+            const MIN_WORD_COUNT = 1; // ou vindo de input/config
+            const MAX_KEYWORDS = 50;
+
+            const filteredKeywords = keywordsArray.filter(([_, freq]) => freq >= MIN_WORD_COUNT).sort((a: any, b: any) => b[1] - a[1]).slice(0, MAX_KEYWORDS);
+            // console.log('filterred: ', filteredKeywords)
 
             script.onload = () => {
                 const canvas = document.getElementById('my_canvas');
@@ -88,17 +96,21 @@ export default function Page() {
                     if (ctx) ctx.scale(dpr, dpr);
 
                     window.WordCloud(canvas, {
-                        list: keywordsArray,
-                        gridSize: 10,
-                        weightFactor: (size: number) => size * 20,
-                        fontFamily: 'Helvetica, Arial, sans-serif',
+                        list: filteredKeywords,
+                        // gridSize: Math.max(12, Math.min(50, Math.floor(keywordsArray.length * 0.3))),
+                        gridSize: MAX_KEYWORDS,
+                        weightFactor: (size: number) => size * 30,
+                        // weightFactor: (size: number) => Math.min(10, Math.max(1.05, size)) * 15,
+                        fontFamily: 'Akatab, sans-serif',
                         color: 'random-dark',
                         backgroundColor: '#f7f7f7',
-                        rotateRatio: 0.4,
+                        rotateRatio: 0,
                         rotationSteps: 2,
                         drawOutOfBound: false,
                         shrinkToFit: true,
+                        minSize: 0,
                         origin: [canvas.offsetWidth / 2, canvas.offsetHeight / 2],
+                        wait: 5,
                     });
                 };
 
@@ -122,8 +134,6 @@ export default function Page() {
         // if (!keywordsArray.length) {
         // }
     }, [loading, keywordsArray]);
-
-
 
     return (
         <main
