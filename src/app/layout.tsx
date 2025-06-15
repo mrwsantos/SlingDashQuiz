@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Noel Leeming Questionnaire",
-  description: "Brand research and strategy.",
+  description: "Brand research and strategy questionnaire.",
 };
 
 export default function RootLayout({
