@@ -8,7 +8,6 @@ export async function PATCH(req: NextRequest) {
     if (!spreadsheetId || !range || !values) {
         return new Response(JSON.stringify({ error: 'Missing spreadsheetId, range or values' }), { status: 400 });
     }
-
     try {
         const auth = new google.auth.GoogleAuth({
             credentials: {
